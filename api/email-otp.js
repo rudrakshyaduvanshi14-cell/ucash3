@@ -47,10 +47,10 @@ async function sendMail(email, code) {
   const subject = code + " is your U Cash verification code";
   const text = "Your U Cash verification code is " + code + ". It expires in 5 minutes.";
   if (OTPLY_KEY) {
-    const q = new URLSearchParams({
-      api_key: OTPLY_KEY, to: email, type: "custom", subject, message: mailHtml(code), html: "1",
+        const q = new URLSearchParams({ api_key: OTPLY_KEY, to: email, subject, message: text });
+    const r = await fetch(OTPLY_URL + "?" + q.toString(), {
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; UCashOTP/1.0)", "Accept": "application/json" },
     });
-    const r = await fetch(OTPLY_URL + "?" + q.toString());
     const t = await r.text();
     let j = {};
     try { j = JSON.parse(t); } catch (e) {}
