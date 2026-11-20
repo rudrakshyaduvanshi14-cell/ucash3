@@ -11,7 +11,7 @@ const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 const USE_SMTP = !!(SMTP_HOST && SMTP_USER && SMTP_PASS);
 const FROM = process.env.EMAIL_FROM || (USE_SMTP ? "U Cash <" + SMTP_USER + ">" : "U Cash <onboarding@resend.dev>");
-const SECRET = process.env.OTP_SECRET;
+const SECRET = process.env.OTP_SECRET || process.env.OTPLY_API_KEY || REDIS_TOKEN;
 
 const TTL = 300;
 const COOLDOWN = 30;
