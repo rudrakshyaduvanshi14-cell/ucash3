@@ -146,7 +146,7 @@ module.exports = async (req, res) => {
       } catch (e) {
         console.error("email-otp: mail error", e && e.message);
         await redis("DEL", "otp:" + email);
-        return reply(200, { ok: false, message: "Could not send the email. Try again later" });
+        return reply(200, { ok: false, message: "Could not send the email. [" + String((e && e.message) || e).slice(0, 180) + "]" });
       }
       return reply(200, { ok: true });
     }
